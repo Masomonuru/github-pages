@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Easy Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+        .side-nav {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+          backgroud-color:gray;
+        }
+        .side-nav.open {
+            transform: translateX(0);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto; /* Center horizontally */
+            padding: 10px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            position: absolute; /* Center vertically */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center vertically */
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .location-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .location-button:hover, .location-button.active {
+            background-color: #1d4ed8;
+            color: white;
+          
+        }
+    </style>
+</head>
+<body class="bg-white-100">
+    <!-- Header -->
+    <header class="flex justify-between items-center p-4 bg-blue-400 shadow-md">
+        <div class="text-xl font-bold">EASY HOME SERVICES</div>
+        <button class="text-2xl" id="menu-button">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+    <!-- Side Navigation -->
+    <div class="fixed top-0 left-0 h-full w-64 bg-gray-200 shadow-md side-nav" id="side-nav">
+        <div class="p-4">
+            <button class="text-2xl mb-4" id="close-button">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+              <hr>
+                <li class="mb-2"><a class="text-lg" href="#">Home</a></li>
+                <li class="mb-2"><a class="text-lg" href="#">About us</a></li>
+                <li class="mb-2"><a class="text-lg" href="#">Term of services </a></li>
+                <li class="mb-2"><a class="text-lg" href="#">Help</a></li>
+              
+<li class="mb-2"><a class="text-lg" href="#">Call us</a></li>
+              <li class="mb-2"><a class="text-lg" href="#">Admin panel</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <main class="p-4">
+       
+
+
+    <!-- Banner Section -->
+    <div class="relative bg-gray-800 text-white h-64 flex items-center justify-center mt-auto">
+        <img src="House Listed.png" alt="Banner Image" class="absolute inset-0 w-full h-full object-cover opacity-100">
+    </div>
+
+    
+    
+        <!-- Title Location -->
+        <div class="text-center text-xl font-bold mb-4">Locations</div>
+      
+      <div class="text-center text-color-red-300 font-bold mb-10">select your location to proceed.</div>
+      
+        <!-- Locations -->
+        <div class="flex flex-wrap gap-2 mb-4">
+            <button class="bg-blue-200 px-4 py-2 rounded-full location-button" onclick="showProperties('kaimosi', this)">Kaimosi</button>
+            <button class="bg-blue-200 px-4 py-2 rounded-full location-button" onclick="showProperties('malindi', this)">Malindi</button>
+            <button class="bg-blue-200 px-4 py-2 rounded-full location-button" onclick="showProperties('kilifi', this)">Kilifi</button>
+            <button class="bg-blue-200 px-4 py-2 rounded-full location-button" onclick="showProperties('kwale', this)">Kwale</button>
+            <button class="bg-blue-200 px-4 py-2 rounded-full location-button" onclick="showProperties('lamu', this)">Lamu</button>
+           
+        </div>
+        <!-- Property Listings -->
+        <div class="grid grid-cols-3  gap-4" id ```html
+="property-listings">
+            <!-- kaimosi Properties -->
+            <div class="bg-white p-2 shadow-md border rounded-lg kaimosi hidden" onclick="openPropertyModal('Moto kubwa rentals')">
+                <img alt="Property image" class="w-full h-20 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Moto kubwa Rentals</div>
+            </div>
+           <div class="bg-white p-2 shadow-md border rounded-lg kaimosi hidden" onclick="openPropertyModal('Runda Apartment')">
+                <img alt="Property image" class="w-full h-20 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Runda Apartment</div>
+            </div>
+            <div class="bg-white p-2 shadow-md border rounded-lg mombasa hidden" onclick="openPropertyModal('Kizingo Apartment')">
+                <img alt="Property image" class="w-full h-20 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Kizingo Apartment</div>
+            </div>
+            <div class="bg-white p-2 shadow-md border rounded-lg mombasa hidden" onclick="openPropertyModal('Nyali House')">
+                
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+              <div class="text-center">Nyali House</div>
+            </div>
+            <!-- Malindi Properties -->
+            <div class="bg-white p-4 shadow-md border rounded-lg malindi hidden" onclick="openPropertyModal('Malindi Villa')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Malindi Villa</div>
+            </div>
+            <div class="bg-white p-4 shadow-md border rounded-lg malindi hidden" onclick="openPropertyModal('Malindi Beach House')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Malindi Beach House</div>
+            </div>
+            <!-- Kilifi Properties -->
+            <div class="bg-white p-4 shadow-md border rounded-lg kilifi hidden" onclick="openPropertyModal('Kilifi Resort')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Kilifi Resort</div>
+            </div>
+            <div class="bg-white p-4 shadow-md border rounded-lg kilifi hidden" onclick="openPropertyModal('Kilifi Beach House')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Kilifi Beach House</div>
+            </div>
+            <!-- Kwale Properties -->
+            <div class="bg-white p-4 shadow-md border rounded-lg kwale hidden" onclick="openPropertyModal('Kwale Villa')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Kwale Villa</div>
+            </div>
+            <div class="bg-white p-4 shadow-md border rounded-lg kwale hidden" onclick="openPropertyModal('Kwale Beach Resort')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Kwale Beach Resort</div>
+            </div>
+            <!-- Lamu Properties -->
+            <div class="bg-white p-4 shadow-md border rounded-lg lamu hidden" onclick="openPropertyModal('Lamu House')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Lamu House</div>
+            </div>
+            <div class="bg-white p-4 shadow-md border rounded-lg lamu hidden" onclick="openPropertyModal('Lamu Beach Villa')">
+                <img alt="Property image" class="w-full h-24 object-cover mb-2" src="https://storage.googleapis.com/a1aa/image/NTjaOseAsYxkX65nJFNDIKTjCJy5fBGQCzrEUb1UAfHk1OePB.jpg"/>
+                <div class="text-center">Lamu Beach Villa</div>
+            </div>
+        </div>
+    </main>
+    <!-- Bottom Navigation -->
+  <br>
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottom Navigation Bar Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Optional: Add some height to the content for scrolling */
+        .content {
+            height: 20px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+   
+
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-blue-200 shadow-lg transition-transform transform translate-y-0">
+        <div class="flex justify-around p-4">
+            <a href="#" class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M3 12h18M3 21h18" />
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="#" class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Profile</span>
+            </a>
+            <a href="#" class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M3 12h18m-6 9H9" />
+                </svg>
+                <span>Notifications</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        let lastScrollTop = 0;
+        const bottomNav = document.getElementById('bottom-nav');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                bottomNav.classList.remove('translate-y-0');
+                bottomNav.classList.add('translate-y-full');
+            } else {
+                // Scrolling up
+                bottomNav.classList.remove('translate-y-full');
+                bottomNav.classList.add('translate-y-0');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        });
+    </script>
+</body>
+</html>
+   
+    <!-- Property Modal -->
+    <div class="modal" id="property-modal">
+        <div class="modal-content">
+            <span class="close" id="modal-close">&times;</span>
+            <h2 id="property-title" class="text-xl font-bold"></h2>
+            <p id="property-description" class="mt-2"></p>
+          <!-- Room Availability and Booking Section -->
+<div class="flex justify-center mb-4">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded mr-2" onclick="checkAvailability()">Check Room Availability</button>
+    <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="bookRoom()">Make a Reservation with us</button>
+</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('menu-button').onclick = function() {
+            document.getElementById('side-nav').classList.toggle('open');
+        };
+        document.getElementById('close-button').onclick = function() {
+            document.getElementById('side-nav').classList.remove('open');
+        };
+        document.getElementById('modal-close').onclick = function() {
+            document.getElementById('property-modal').style.display = 'none';
+        };
+        function showProperties(location, button) {
+            const buttons = document.querySelectorAll('.location-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const properties = document.querySelectorAll('.grid > div');
+            properties.forEach(property => {
+                property.classList.add('hidden');
+                if (property.classList.contains(location)) {
+                    property.classList.remove('hidden');
+                }
+            });
+        }
+        function openPropertyModal(propertyName) {
+            document.getElementById('property-title').innerText = propertyName;
+            document.getElementById('property-description').innerText = ' Glad you are interacting with  ' + propertyName;
+            document.getElementById('property-modal').style.display = 'block';
+        }
+  function checkAvailability() {
+        // Example: Redirect to the availability page with selected parameters
+        const location = document.querySelector('.location-button.active').innerText;
+        const checkInDate = prompt("Enter Check-In Date (YYYY-MM-DD):");
+        const checkOutDate = prompt("Enter Check-Out Date (YYYY-MM-DD):");
+        if (checkInDate && checkOutDate) {
+            window.location.href = `availability.html?location=${location}&checkIn=${checkInDate}&checkOut=${checkOutDate}`;
+        } else {
+            alert("Please enter valid dates.");
+        }
+    }
+
+    function bookRoom() {
+        // Example: Redirect to the booking page with selected parameters
+        const propertyName = document.getElementById('property-title').innerText;
+        window.location.href = `booking.html?property=${propertyName}`;
+    }
+    </script>
+</body>
+</html>
